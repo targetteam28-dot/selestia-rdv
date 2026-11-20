@@ -570,16 +570,6 @@ footer a:hover{color:var(--paper)}
   }
   function isPicked(ref){ return picked.some(function(p){ return p.ref === ref; }); }
 
-  $('#grid').addEventListener('click', function(e){
-    var b = e.target.closest('.pick'); if (!b) return;
-    var ref = b.dataset.ref;
-    if (isPicked(ref)) picked = picked.filter(function(p){ return p.ref !== ref; });
-    else { picked.push({ name:b.dataset.name, ref:ref, coll:b.dataset.coll }); track('AddToWishlist', { content_ids:[ref], content_name:b.dataset.name }); }
-    var on = isPicked(ref);
-    b.setAttribute('aria-pressed', on); b.querySelector('span').textContent = on ? 'Ajoutée' : 'Je veux l\'essayer';
-    renderChips(); updateSticky();
-  });
-
   function renderChips(){
     var el = $('#chips');
     if (!picked.length) { el.innerHTML = '<span class="empty">Aucun modèle pour l\'instant — <a href="#collections">parcourir les collections</a> (facultatif).</span>'; return; }
